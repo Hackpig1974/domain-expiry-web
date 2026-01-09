@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domain Expiration Monitor</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🌐 Domain Expiration Monitor</h1>
+      <p>Track your domain renewals at a glance</p>
+    </header>
+    
+    <div class="content">
+      <div class="controls">
+        <div id="status" class="status loading">Initializing...</div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <div class="theme-toggle">
+            <button class="theme-btn" data-theme="light" onclick="setTheme('light')">☀️ Light</button>
+            <button class="theme-btn" data-theme="dark" onclick="setTheme('dark')">🌙 Dark</button>
+            <button class="theme-btn active" data-theme="system" onclick="setTheme('system')">💻 System</button>
+          </div>
+          <button class="refresh-btn" onclick="manualRefresh()">🔄 Refresh Now</button>
+        </div>
+      </div>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Domain</th>
+            <th>Expiration Date</th>
+            <th>Days Remaining</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="domainTableBody">
+          <tr>
+            <td colspan="4" style="text-align: center; padding: 40px;">
+              <em>Loading domain data...</em>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <footer>
+      <div class="footer-info">
+        <span id="lastUpdated">Last updated: Never</span>
+        <span>Next refresh: <span id="countdown">--</span></span>
+      </div>
+      <div>
+        <a href="https://github.com/Hackpig1974/domain-expiry" target="_blank" style="color: #667eea; text-decoration: none;">
+          Domain Expiry Monitor
+        </a>
+      </div>
+    </footer>
+  </div>
+  
+  <!-- Load configuration first, then app logic -->
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

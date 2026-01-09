@@ -1,0 +1,342 @@
+/* Domain Expiry Web UI - Styles with Light/Dark Theme Support */
+
+:root {
+  /* Light theme colors (default) */
+  --bg-gradient-start: #f8f9fa;
+  --bg-gradient-end: #e9ecef;
+  --container-bg: #ffffff;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --header-bg: #ffffff;
+  --header-text: #212529;
+  --border-color: #dee2e6;
+  --table-header-bg: #f8f9fa;
+  --table-hover: #f1f3f5;
+  --button-bg: #0d6efd;
+  --button-hover: #0b5ed7;
+  --shadow: rgba(0, 0, 0, 0.1);
+  
+  /* Status colors */
+  --status-red-bg: #f8d7da;
+  --status-red-hover: #f1aeb5;
+  --status-yellow-bg: #fff3cd;
+  --status-yellow-hover: #ffecb5;
+  --status-green-bg: #D4F1F4;
+  --status-green-hover: #B8E5E8;
+  --status-unknown-bg: #e9ecef;
+  
+  /* Alert colors */
+  --alert-loading-bg: #cfe2ff;
+  --alert-loading-text: #052c65;
+  --alert-success-bg: #d1e7dd;
+  --alert-success-text: #0a3622;
+  --alert-error-bg: #f8d7da;
+  --alert-error-text: #58151c;
+}
+
+/* Dark theme colors */
+[data-theme="dark"] {
+  --bg-gradient-start: #1a1a1a;
+  --bg-gradient-end: #2d2d2d;
+  --container-bg: #2d2d2d;
+  --text-primary: #e9ecef;
+  --text-secondary: #adb5bd;
+  --header-bg: #212529;
+  --header-text: #e9ecef;
+  --border-color: #495057;
+  --table-header-bg: #343a40;
+  --table-hover: #3d4349;
+  --button-bg: #0d6efd;
+  --button-hover: #0b5ed7;
+  --shadow: rgba(0, 0, 0, 0.5);
+  
+  /* Status colors - darker variants */
+  --status-red-bg: #5a1f1f;
+  --status-red-hover: #6e2828;
+  --status-yellow-bg: #5a4d1f;
+  --status-yellow-hover: #6e5e28;
+  --status-green-bg: #1E3A40;
+  --status-green-hover: #2A4F56;
+  --status-unknown-bg: #343a40;
+  
+  /* Alert colors - darker variants */
+  --alert-loading-bg: #1a3a52;
+  --alert-loading-text: #cfe2ff;
+  --alert-success-bg: #1a4028;
+  --alert-success-text: #d1e7dd;
+  --alert-error-bg: #4a1f1f;
+  --alert-error-text: #f8d7da;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  min-height: 100vh;
+  padding: 20px;
+  color: var(--text-primary);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--container-bg);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px var(--shadow);
+  overflow: hidden;
+}
+
+header {
+  background: var(--header-bg);
+  color: var(--header-text);
+  padding: 30px;
+  text-align: center;
+  border-bottom: 2px solid var(--border-color);
+}
+
+header h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+header p {
+  font-size: 1.1em;
+  opacity: 0.85;
+  color: var(--text-secondary);
+}
+
+.content {
+  padding: 30px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.theme-toggle {
+  display: flex;
+  gap: 5px;
+  background: var(--table-header-bg);
+  border-radius: 6px;
+  padding: 4px;
+}
+
+.theme-btn {
+  background: transparent;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.theme-btn:hover {
+  background: var(--table-hover);
+  color: var(--text-primary);
+}
+
+.theme-btn.active {
+  background: var(--button-bg);
+  color: white;
+}
+
+.status {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.95em;
+}
+
+.status.loading {
+  background: var(--alert-loading-bg);
+  color: var(--alert-loading-text);
+}
+
+.status.success {
+  background: var(--alert-success-bg);
+  color: var(--alert-success-text);
+}
+
+.status.error {
+  background: var(--alert-error-bg);
+  color: var(--alert-error-text);
+}
+
+.status.warning {
+  background: var(--alert-loading-bg);
+  color: var(--alert-loading-text);
+}
+
+.refresh-btn {
+  background: var(--button-bg);
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-size: 0.95em;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-weight: 500;
+}
+
+.refresh-btn:hover {
+  background: var(--button-hover);
+}
+
+.refresh-btn:active {
+  transform: translateY(1px);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+thead {
+  background: var(--table-header-bg);
+}
+
+thead th {
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border-color);
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+tbody td {
+  padding: 15px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+  background-color: var(--table-hover);
+}
+
+/* Status row colors */
+.status-red {
+  background-color: var(--status-red-bg);
+}
+
+.status-red:hover {
+  background-color: var(--status-red-hover) !important;
+}
+
+.status-yellow {
+  background-color: var(--status-yellow-bg);
+}
+
+.status-yellow:hover {
+  background-color: var(--status-yellow-hover) !important;
+}
+
+.status-green {
+  background-color: var(--status-green-bg);
+}
+
+.status-green:hover {
+  background-color: var(--status-green-hover) !important;
+}
+
+.status-unknown {
+  background-color: var(--status-unknown-bg);
+}
+
+.status-cell {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.status-icon {
+  display: inline-block;
+}
+
+footer {
+  background: var(--table-header-bg);
+  padding: 20px 30px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9em;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.footer-info {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+footer a {
+  color: var(--button-bg);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+footer a:hover {
+  opacity: 0.8;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+  
+  header h1 {
+    font-size: 1.8em;
+  }
+  
+  .content {
+    padding: 15px;
+  }
+  
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .status, .refresh-btn, .theme-toggle {
+    width: 100%;
+    text-align: center;
+  }
+  
+  table {
+    font-size: 0.9em;
+  }
+  
+  thead th, tbody td {
+    padding: 10px 8px;
+  }
+  
+  footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}
