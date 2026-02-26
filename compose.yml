@@ -19,7 +19,7 @@ services:
 
   # Domain Expiry Web UI Service
   domain-expiry-web:
-    image: nginx:alpine
+    image: nginx:1.28.2-alpine  # Pinned to stable. Change to nginx:alpine for always-latest
     container_name: domain-expiry-web
     volumes:
       - ./webserver:/usr/share/nginx/html:ro

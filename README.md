@@ -19,84 +19,7 @@ A beautiful standalone web dashboard for monitoring domain renewals. This projec
 - Docker & Docker Compose installed
 - Available ports: 80 (web UI) and 8088 (API)
 
-There are two ways to run this project. **Option A** is the quickest — no repo clone needed. **Option B** is for users who want to customize or self-build.
-
----
-
-### Option A — Docker Hub Image (Recommended)
-
-No clone required. Create a `compose.yml` and `.env` file manually.
-
-**Step 1: Create compose.yml**
-```yaml
-services:
-  domain-expiry:
-    image: damon1974/domain-expiry:latest
-    container_name: domain-expiry
-    env_file: .env
-    environment:
-      - TZ=${TZ:-America/Denver}
-    ports:
-      - "8088:8000"
-    networks:
-      - domain-net
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8000/healthz || exit 1"]
-      interval: 60s
-      timeout: 5s
-      retries: 3
-
-  domain-expiry-web:
-    image: damon1974/domain-expiry-web:latest
-    container_name: domain-expiry-web
-    ports:
-      - "80:80"
-    networks:
-      - domain-net
-    restart: unless-stopped
-    depends_on:
-      - domain-expiry
-
-networks:
-  domain-net:
-    driver: bridge
-```
-
-**Step 2: Create .env**
-```bash
-cp .env.example .env   # or create manually from scratch
-nano .env
-```
-
-```env
-DOMAINS=example.com,mysite.com,portfolio.io
-RDAP_BASE=https://rdap.org/domain
-ALERT_DAYS=183
-```
-
-**Step 3: Start Services**
-```bash
-docker compose up -d
-```
-
-**Step 4: Access Web UI**
-
-Open your browser to:
-- **Local**: http://localhost
-- **Remote**: http://YOUR_SERVER_IP
-
-**To update to the latest image:**
-```bash
-docker compose pull
-docker compose up -d
-```
-
----
-
-### Option B — Clone and Self-Build
-
-Use this if you want to customize the web UI files or build the image yourself.
+### Installation
 
 **Step 1: Clone Repository**
 ```bash
@@ -118,7 +41,7 @@ ALERT_DAYS=183
 
 **Step 3: Start Services**
 
-The included `compose.yml` uses `nginx:alpine` with a bind mount to the local `webserver/` folder, so any edits to the web files are reflected immediately without rebuilding.
+The included `compose.yml` uses a pinned `nginx:1.28.2-alpine` image with a bind mount to the local `webserver/` folder. Any edits to the web files are reflected immediately on container restart. To use always-latest nginx, change the image tag to `nginx:alpine`.
 
 ```bash
 docker compose up -d
