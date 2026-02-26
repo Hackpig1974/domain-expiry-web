@@ -47,6 +47,13 @@ The included `compose.yml` uses a pinned `nginx:1.28.2-alpine` image with a bind
 docker compose up -d
 ```
 
+**To update:**
+```bash
+git pull
+docker compose pull
+docker compose up -d
+```
+
 **Step 4: Access Web UI**
 
 Open your browser to:
