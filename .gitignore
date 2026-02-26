@@ -1,0 +1,10 @@
+# Environment variables - never commit this
+.env
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Editor directories
+.vscode/
+.idea/

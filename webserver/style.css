@@ -303,6 +303,89 @@ footer a:hover {
   opacity: 0.8;
 }
 
+/* ===== SETTINGS GEAR ===== */
+
+.settings-wrapper {
+  position: relative;
+}
+
+.settings-btn {
+  background: var(--table-header-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.settings-btn:hover,
+.settings-btn.active {
+  background: var(--button-bg);
+  border-color: var(--button-bg);
+  color: white;
+}
+
+.settings-panel {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--container-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 6px 20px var(--shadow);
+  padding: 14px;
+  min-width: 200px;
+  z-index: 100;
+}
+
+.settings-panel.open {
+  display: block;
+}
+
+.settings-title {
+  font-size: 0.8em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.format-options {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.format-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 8px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  color: var(--text-primary);
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.format-btn:hover {
+  background: var(--table-hover);
+  border-color: var(--border-color);
+}
+
+.format-btn.active {
+  background: var(--button-bg);
+  border-color: var(--button-bg);
+  color: white;
+}
+
+/* ===== Responsive design ===== */
+
 /* Responsive design */
 @media (max-width: 768px) {
   body {

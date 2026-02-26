@@ -13,20 +13,39 @@
       <h1>🌐 Domain Expiration Monitor</h1>
       <p>Track your domain renewals at a glance</p>
     </header>
-    
+
     <div class="content">
       <div class="controls">
         <div id="status" class="status loading">Initializing...</div>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+
           <div class="theme-toggle">
             <button class="theme-btn" data-theme="light" onclick="setTheme('light')">☀️ Light</button>
             <button class="theme-btn" data-theme="dark" onclick="setTheme('dark')">🌙 Dark</button>
             <button class="theme-btn active" data-theme="system" onclick="setTheme('system')">💻 System</button>
           </div>
+
           <button class="refresh-btn" onclick="manualRefresh()">🔄 Refresh Now</button>
+
+          <!-- Settings gear -->
+          <div class="settings-wrapper">
+            <button id="settingsBtn" class="settings-btn" onclick="toggleSettings()" title="Date format settings">⚙️</button>
+            <div id="settingsPanel" class="settings-panel">
+              <div class="settings-title">Date Format</div>
+              <div class="format-options">
+                <button class="format-btn" data-format="auto"       onclick="setDateFormat('auto')">🌐 Auto (Browser Locale)</button>
+                <button class="format-btn" data-format="DD/MM/YYYY" onclick="setDateFormat('DD/MM/YYYY')">DD/MM/YYYY</button>
+                <button class="format-btn" data-format="DD-MM-YYYY" onclick="setDateFormat('DD-MM-YYYY')">DD-MM-YYYY</button>
+                <button class="format-btn" data-format="MM/DD/YYYY" onclick="setDateFormat('MM/DD/YYYY')">MM/DD/YYYY</button>
+                <button class="format-btn" data-format="MM-DD-YYYY" onclick="setDateFormat('MM-DD-YYYY')">MM-DD-YYYY</button>
+                <button class="format-btn" data-format="YYYY-MM-DD" onclick="setDateFormat('YYYY-MM-DD')">YYYY-MM-DD</button>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
-      
+
       <table>
         <thead>
           <tr>
@@ -45,7 +64,7 @@
         </tbody>
       </table>
     </div>
-    
+
     <footer>
       <div class="footer-info">
         <span id="lastUpdated">Last updated: Never</span>
@@ -58,8 +77,7 @@
       </div>
     </footer>
   </div>
-  
-  <!-- Load configuration first, then app logic -->
+
   <script src="config.js"></script>
   <script src="app.js"></script>
 </body>

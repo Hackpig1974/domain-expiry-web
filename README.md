@@ -7,6 +7,7 @@ A beautiful standalone web dashboard for monitoring domain renewals. This projec
 - ⏱️ **Live Countdown** - Shows time until next refresh
 - 🔄 **Auto-Refresh** - Configurable interval (default 1 hour)
 - 📱 **Responsive Design** - Works on desktop, tablet, and mobile
+- 🌍 **Locale-Aware Date Formatting** - Auto-detects browser locale or choose from 5 manual formats
 - ⚡ **Zero Dependencies** - Pure HTML/CSS/JavaScript + nginx
 
 ---
@@ -128,6 +129,12 @@ ports:
 - 🟡 **Yellow**: 91-184 days (3-6 months)
 - 🟢 **Green**: >184 days (over 6 months)
 - ⚪ **Gray**: Status unknown
+
+### Date Format
+- **⚙️ Settings gear** (top right) opens the date format panel
+- **🌐 Auto (Browser Locale)**: Default — uses `Intl.DateTimeFormat` to match the user's browser region automatically
+- **Manual options**: DD/MM/YYYY, DD-MM-YYYY, MM/DD/YYYY, MM-DD-YYYY, YYYY-MM-DD
+- **Persistent**: Format choice saved in browser `localStorage`
 
 ### Live Countdown
 Footer displays time until next auto-refresh: `Next refresh: 59m 30s`
