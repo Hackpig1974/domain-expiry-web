@@ -330,18 +330,18 @@ footer a:hover {
 
 .settings-panel {
   display: none;
-  position: absolute;
-  bottom: calc(100% + 8px);
-  right: 0;
+  position: fixed;
+  top: 80px;
+  right: 20px;
   background: var(--container-bg);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   box-shadow: 0 6px 20px var(--shadow);
   padding: 14px;
   min-width: 240px;
-  max-height: 80vh;
+  max-height: calc(100vh - 100px);
   overflow-y: auto;
-  z-index: 100;
+  z-index: 1000;
 }
 
 .settings-panel.open {
