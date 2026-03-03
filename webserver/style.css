@@ -331,7 +331,7 @@ footer a:hover {
 .settings-panel {
   display: none;
   position: absolute;
-  top: calc(100% + 8px);
+  bottom: calc(100% + 8px);
   right: 0;
   background: var(--container-bg);
   border: 1px solid var(--border-color);
