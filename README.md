@@ -230,7 +230,7 @@ Then access via: http://localhost:8089
 - ✅ You want theme customization
 - ✅ You prefer a dedicated interface
 
-**Use domain-expiry (original) when:**
+**Use [domain-expiry](https://github.com/Hackpig1974/domain-expiry) (original) when:**
 - ✅ You already use Homepage dashboard
 - ✅ You want all services in one place
 - ✅ You need Homepage's widget features
