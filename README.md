@@ -8,6 +8,7 @@ A standalone web dashboard for monitoring domain renewals. This project extends 
 - 🔄 **Auto-Refresh** - Configurable interval (default 1 hour)
 - 📱 **Responsive Design** - Works on desktop, tablet, and mobile
 - 🌍 **Locale-Aware Date Formatting** - Auto-detects browser locale or choose from 5 manual formats
+- ⚙️ **Configurable Thresholds** - Set your own Red/Yellow day values directly in the UI
 - ⚡ **Zero Dependencies** - Pure HTML/CSS/JavaScript + nginx
 
 ---
@@ -114,11 +115,11 @@ ports:
 - 🟢 **Green**: >184 days (over 6 months)
 - ⚪ **Gray**: Status unknown
 
-### Date Format
-- **⚙️ Settings gear** (top right) opens the date format panel
-- **🌐 Auto (Browser Locale)**: Default — uses `Intl.DateTimeFormat` to match the user's browser region automatically
-- **Manual options**: DD/MM/YYYY, DD-MM-YYYY, MM/DD/YYYY, MM-DD-YYYY, YYYY-MM-DD
-- **Persistent**: Format choice saved in browser localStorage
+### Date Format & Thresholds
+- **⚙️ Settings gear** (top right) opens the settings panel with two sections:
+- **Date Format** — Auto (Browser Locale) default, or choose from DD/MM/YYYY, DD-MM-YYYY, MM/DD/YYYY, MM-DD-YYYY, YYYY-MM-DD
+- **Status Thresholds** — Set your own Red alert and Yellow warning day values. Defaults to 90 and 184 days if not customized
+- **Persistent**: All settings saved in browser localStorage
 
 ### Live Countdown
 Footer displays time until next auto-refresh: `Next refresh: 59m 30s`
@@ -254,11 +255,9 @@ Both can run simultaneously on different ports.
 
 ## 🤝 Contributing
 
-Found a bug or want a feature?
-
-1. Open an issue describing the problem or request
-2. Submit a PR with improvements
-3. Share screenshots of your setup!
+Found a bug? Open an issue.
+Have a feature request or question? Start a [Discussion](https://github.com/Hackpig1974/domain-expiry-web/discussions).
+Want to contribute code? Submit a PR with improvements and share screenshots of your setup!
 
 ---
 
