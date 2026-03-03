@@ -1,6 +1,6 @@
 # 🌐 Domain Expiration Monitor - Web UI
 
-A beautiful standalone web dashboard for monitoring domain renewals. This project extends the [Domain Expiry API](https://github.com/Hackpig1974/domain-expiry) with a modern web interface featuring:
+A standalone web dashboard for monitoring domain renewals. This project extends the [Domain Expiry API](https://github.com/Hackpig1974/domain-expiry) with a modern web interface featuring:
 
 - 🎨 **Light/Dark/System Themes** - Automatic theme switching that follows your OS
 - 📊 **Color-Coded Status** - Red (≤3 months), Yellow (3-6 months), Green (>6 months)
@@ -21,40 +21,39 @@ A beautiful standalone web dashboard for monitoring domain renewals. This projec
 
 ### Installation
 
-**Step 1: Clone Repository**
+**Step 1: Create a project directory**
 ```bash
-git clone https://github.com/Hackpig1974/domain-expiry-web.git
+mkdir domain-expiry-web
 cd domain-expiry-web
 ```
 
-**Step 2: Configure Environment**
+**Step 2: Download the required files**
 ```bash
-cp .env.example .env
+wget https://raw.githubusercontent.com/Hackpig1974/domain-expiry-web/main/compose.yml
+wget https://raw.githubusercontent.com/Hackpig1974/domain-expiry-web/main/.env.example -O .env
+```
+
+**Step 3: Configure your domains**
+```bash
 nano .env
 ```
 
 Add your domains:
 ```env
 DOMAINS=example.com,mysite.com,portfolio.io
+RDAP_BASE=https://rdap.org/domain
 ALERT_DAYS=183
+TZ=America/Denver
 ```
 
-**Step 3: Start Services**
-
-The included `compose.yml` uses a pinned `nginx:1.28.2-alpine` image with a bind mount to the local `webserver/` folder. Any edits to the web files are reflected immediately on container restart. To use always-latest nginx, change the image tag to `nginx:alpine`.
-
+**Step 4: Start Services**
 ```bash
 docker compose up -d
 ```
 
-**To update:**
-```bash
-git pull
-docker compose pull
-docker compose up -d
-```
+Docker will pull both images automatically on first run. No local web files needed.
 
-**Step 4: Access Web UI**
+**Step 5: Access Web UI**
 
 Open your browser to:
 - **Local**: http://localhost
@@ -62,20 +61,16 @@ Open your browser to:
 
 ---
 
-## 📁 Project Structure
+## 🔄 Updating
 
+Both containers are published to Docker Hub. Updates to the web UI and API are delivered via new image versions:
+
+```bash
+docker compose pull
+docker compose up -d
 ```
-domain-expiry-web/
-├── compose.yml              # Docker Compose (API + Web UI)
-├── .env.example             # Configuration template
-├── .env                     # Your configuration (create this)
-└── webserver/               # Web UI files
-    ├── index.html          # Main page
-    ├── style.css           # Styling with theme support
-    ├── app.js              # Application logic
-    ├── config.js           # User-editable settings
-    └── nginx.conf          # Nginx proxy configuration
-```
+
+That's it — no git, no local file management.
 
 ---
 
@@ -93,33 +88,14 @@ domain-expiry-web/
 | `WHOIS_FALLBACK_ENABLED` | No | false | Enable WHOIS fallback for .uk/.ca/.fr |
 | `WHOISXML_API_KEY` | No | - | API key for ALL TLDs (500 free/month) |
 
-### Web UI Settings (webserver/config.js)
-
-```javascript
-const CONFIG = {
-  apiUrl: '/api',              // API endpoint (proxied through nginx)
-  refreshInterval: 3600000,    // 1 hour in milliseconds
-  thresholds: {
-    red: 90,                   // Alert threshold (3 months)
-    yellow: 184                // Warning threshold (6 months)
-  }
-};
-```
-
-**Change Refresh Interval:**
-- 15 minutes: `900000`
-- 30 minutes: `1800000`
-- 1 hour: `3600000` (default)
-- 2 hours: `7200000`
-
 ### Port Configuration
 
 Edit `compose.yml` to change ports:
 
 ```yaml
 ports:
-  - "8089:80"  # Web UI now on port 8089
-  - "8090:8000"  # API now on port 8090
+  - "8089:80"   # Web UI on port 8089
+  - "8090:8000" # API on port 8090
 ```
 
 ---
@@ -142,7 +118,7 @@ ports:
 - **⚙️ Settings gear** (top right) opens the date format panel
 - **🌐 Auto (Browser Locale)**: Default — uses `Intl.DateTimeFormat` to match the user's browser region automatically
 - **Manual options**: DD/MM/YYYY, DD-MM-YYYY, MM/DD/YYYY, MM-DD-YYYY, YYYY-MM-DD
-- **Persistent**: Format choice saved in browser `localStorage`
+- **Persistent**: Format choice saved in browser localStorage
 
 ### Live Countdown
 Footer displays time until next auto-refresh: `Next refresh: 59m 30s`
@@ -161,12 +137,12 @@ Click "🔄 Refresh Now" to update immediately and reset countdown.
 docker ps
 ```
 
-Should see both `domain-expiry` and `domain-expiry-web`.
+Should see both `domain-expiry` and `domain-expiry-webserver`.
 
 **Check logs:**
 ```bash
 docker logs domain-expiry
-docker logs domain-expiry-web
+docker logs domain-expiry-webserver
 ```
 
 ### Domains Showing N/A
@@ -191,31 +167,14 @@ docker compose restart
 
 ### Port Already in Use
 
-If port 80 is occupied:
+If port 80 is occupied, edit `compose.yml`:
 
 ```yaml
-# In compose.yml
 ports:
-  - "8089:80"  # Change to any available port
+  - "8089:80"
 ```
 
 Then access via: http://localhost:8089
-
----
-
-## 🔄 Updating
-
-**Update both containers:**
-```bash
-docker compose pull
-docker compose up -d
-```
-
-**Update only web UI files:**
-Just edit files in `webserver/` directory and restart:
-```bash
-docker compose restart domain-expiry-web
-```
 
 ---
 
@@ -229,19 +188,19 @@ docker compose restart domain-expiry-web
          │ HTTP
          ▼
 ┌─────────────────┐
-│  nginx:alpine   │  Serves static HTML/CSS/JS
-│  (Web UI)       │  Proxies /api/* to backend
+│  domain-expiry  │  Serves static HTML/CSS/JS
+│  -webserver     │  Proxies /api/* to backend
 └────────┬────────┘
          │ HTTP
          ▼
 ┌─────────────────┐
-│  FastAPI        │  Domain expiry data
+│  domain-expiry  │  Domain expiry data
 │  (API)          │  RDAP/WHOIS queries
 └─────────────────┘
 ```
 
 **Data Flow:**
-1. Browser loads static files from nginx
+1. Browser loads static files from the webserver container
 2. JavaScript fetches `/api/status` (proxied to API container)
 3. API queries RDAP/WHOIS for domain data
 4. JavaScript updates table with color-coded results
@@ -260,11 +219,6 @@ docker compose restart domain-expiry-web
 - Don't expose to internet without authentication
 - Run behind reverse proxy (nginx/Traefik) with auth
 - No sensitive data stored (public WHOIS info only)
-
-### Deployment
-- Keep `webserver/` directory clean for Git updates
-- Edit `config.js` for site-specific settings
-- Edit `.env` for domain list changes
 
 ---
 
@@ -293,7 +247,7 @@ Both can run simultaneously on different ports.
 **domain-expiry-web:**
 - Three-tier color system: Red (≤90d) / Yellow (91-184d) / Green (>184d)
 - Visual status for ALL domains at a glance
-- Independent thresholds (configurable in webserver/config.js)
+- Independent thresholds (configurable via Settings panel in UI)
 - Themed colors adapt to Light/Dark mode
 
 ---
@@ -305,6 +259,23 @@ Found a bug or want a feature?
 1. Open an issue describing the problem or request
 2. Submit a PR with improvements
 3. Share screenshots of your setup!
+
+---
+
+## 🛠️ Development
+
+Want to modify the web UI or build your own image:
+
+```bash
+git clone https://github.com/Hackpig1974/domain-expiry-web.git
+cd domain-expiry-web
+```
+
+Edit files in `webserver/`, then build locally:
+
+```bash
+docker build -t domain-expiry-webserver:dev .
+```
 
 ---
 
