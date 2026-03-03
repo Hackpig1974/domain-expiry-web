@@ -40,6 +40,24 @@
                 <button class="format-btn" data-format="MM-DD-YYYY" onclick="setDateFormat('MM-DD-YYYY')">MM-DD-YYYY</button>
                 <button class="format-btn" data-format="YYYY-MM-DD" onclick="setDateFormat('YYYY-MM-DD')">YYYY-MM-DD</button>
               </div>
+
+              <div class="settings-divider"></div>
+
+              <div class="settings-title">Status Thresholds</div>
+              <div class="threshold-options">
+                <div class="threshold-row">
+                  <label class="threshold-label">🔴 Red alert</label>
+                  <input id="thresholdRed" class="threshold-input" type="number" min="1" max="9999">
+                  <span class="threshold-unit">days</span>
+                </div>
+                <div class="threshold-row">
+                  <label class="threshold-label">🟡 Warning</label>
+                  <input id="thresholdYellow" class="threshold-input" type="number" min="1" max="9999">
+                  <span class="threshold-unit">days</span>
+                </div>
+                <div id="thresholdError" class="threshold-error"></div>
+                <button class="threshold-apply-btn" onclick="applyThresholds()">Apply</button>
+              </div>
             </div>
           </div>
 

@@ -384,6 +384,77 @@ footer a:hover {
   color: white;
 }
 
+/* ===== THRESHOLD SETTINGS ===== */
+
+.settings-divider {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 12px 0;
+}
+
+.threshold-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.threshold-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.threshold-label {
+  font-size: 0.9em;
+  color: var(--text-primary);
+  width: 90px;
+  flex-shrink: 0;
+}
+
+.threshold-input {
+  width: 65px;
+  padding: 5px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--container-bg);
+  color: var(--text-primary);
+  font-size: 0.9em;
+  text-align: right;
+}
+
+.threshold-input:focus {
+  outline: none;
+  border-color: var(--button-bg);
+}
+
+.threshold-unit {
+  font-size: 0.85em;
+  color: var(--text-secondary);
+}
+
+.threshold-error {
+  font-size: 0.8em;
+  color: #dc3545;
+  min-height: 1em;
+}
+
+.threshold-apply-btn {
+  background: var(--button-bg);
+  color: white;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 5px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+.threshold-apply-btn:hover {
+  background: var(--button-hover);
+}
+
 /* ===== Responsive design ===== */
 
 /* Responsive design */

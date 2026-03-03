@@ -165,6 +165,41 @@ document.addEventListener('DOMContentLoaded', () => {
 function initSettings() {
   const format = getDateFormat();
   updateFormatButtons(format);
+
+  // Load saved thresholds into inputs, fall back to config.js defaults
+  const red    = parseInt(localStorage.getItem('thresholdRed'))    || CONFIG.thresholds.red;
+  const yellow = parseInt(localStorage.getItem('thresholdYellow')) || CONFIG.thresholds.yellow;
+  document.getElementById('thresholdRed').value    = red;
+  document.getElementById('thresholdYellow').value = yellow;
+}
+
+// Return active thresholds — localStorage values take priority over config.js defaults
+function getThresholds() {
+  return {
+    red:    parseInt(localStorage.getItem('thresholdRed'))    || CONFIG.thresholds.red,
+    yellow: parseInt(localStorage.getItem('thresholdYellow')) || CONFIG.thresholds.yellow
+  };
+}
+
+// Validate, save, and apply threshold changes
+function applyThresholds() {
+  const red    = parseInt(document.getElementById('thresholdRed').value);
+  const yellow = parseInt(document.getElementById('thresholdYellow').value);
+  const errorEl = document.getElementById('thresholdError');
+
+  if (!red || !yellow || red < 1 || yellow < 1) {
+    errorEl.textContent = 'Both values must be at least 1.';
+    return;
+  }
+  if (red >= yellow) {
+    errorEl.textContent = 'Red must be less than Yellow.';
+    return;
+  }
+
+  errorEl.textContent = '';
+  localStorage.setItem('thresholdRed', red);
+  localStorage.setItem('thresholdYellow', yellow);
+  fetchDomainData();
 }
 
 async function fetchDomainData() {
@@ -225,15 +260,16 @@ async function fetchDomainData() {
 
 function createDomainRow(domain) {
   const row = document.createElement('tr');
+  const thresholds = getThresholds();
 
   let statusClass = 'status-green';
   let statusIcon  = '🟢';
 
   if (domain.days_left !== null && domain.days_left !== undefined) {
-    if (domain.days_left <= CONFIG.thresholds.red) {
+    if (domain.days_left <= thresholds.red) {
       statusClass = 'status-red';
       statusIcon  = '🔴';
-    } else if (domain.days_left <= CONFIG.thresholds.yellow) {
+    } else if (domain.days_left <= thresholds.yellow) {
       statusClass = 'status-yellow';
       statusIcon  = '🟡';
     }
