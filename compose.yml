@@ -18,12 +18,9 @@ services:
       retries: 3
 
   # Domain Expiry Web UI Service
-  domain-expiry-web:
-    image: nginx:1.28.2-alpine  # Pinned to stable. Change to nginx:alpine for always-latest
-    container_name: domain-expiry-web
-    volumes:
-      - ./webserver:/usr/share/nginx/html:ro
-      - ./webserver/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+  domain-expiry-webserver:
+    image: damon1974/domain-expiry-webserver:latest
+    container_name: domain-expiry-webserver
     ports:
       - "80:80"  # Change left port if 80 is in use (e.g., "8089:80")
     networks:
