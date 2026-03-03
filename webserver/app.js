@@ -169,8 +169,12 @@ function initSettings() {
   // Load saved thresholds into inputs, fall back to config.js defaults
   const red    = parseInt(localStorage.getItem('thresholdRed'))    || CONFIG.thresholds.red;
   const yellow = parseInt(localStorage.getItem('thresholdYellow')) || CONFIG.thresholds.yellow;
-  document.getElementById('thresholdRed').value    = red;
-  document.getElementById('thresholdYellow').value = yellow;
+
+  const redInput    = document.getElementById('thresholdRed');
+  const yellowInput = document.getElementById('thresholdYellow');
+
+  if (redInput)    redInput.value    = red;
+  if (yellowInput) yellowInput.value = yellow;
 }
 
 // Return active thresholds — localStorage values take priority over config.js defaults

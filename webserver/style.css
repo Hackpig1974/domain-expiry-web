@@ -339,6 +339,8 @@ footer a:hover {
   box-shadow: 0 6px 20px var(--shadow);
   padding: 14px;
   min-width: 200px;
+  max-height: 80vh;
+  overflow-y: auto;
   z-index: 100;
 }
 
