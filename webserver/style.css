@@ -330,22 +330,24 @@ footer a:hover {
 
 .settings-panel {
   display: none;
-  position: fixed;
-  top: 80px;
-  right: 20px;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
   background: var(--container-bg);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   box-shadow: 0 6px 20px var(--shadow);
   padding: 14px;
   min-width: 240px;
-  max-height: calc(100vh - 100px);
-  overflow-y: auto;
+  width: 260px;
   z-index: 1000;
 }
 
 .settings-panel.open {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  max-height: 70vh;
+  overflow-y: auto;
 }
 
 .settings-title {
