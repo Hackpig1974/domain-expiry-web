@@ -89,7 +89,7 @@ body {
   background: var(--container-bg);
   border-radius: 12px;
   box-shadow: 0 10px 40px var(--shadow);
-  overflow: hidden;
+  overflow: visible;
 }
 
 header {
@@ -338,7 +338,7 @@ footer a:hover {
   border-radius: 8px;
   box-shadow: 0 6px 20px var(--shadow);
   padding: 14px;
-  min-width: 200px;
+  min-width: 240px;
   max-height: 80vh;
   overflow-y: auto;
   z-index: 100;
