@@ -204,6 +204,7 @@ function applyThresholds() {
   localStorage.setItem('thresholdRed', red);
   localStorage.setItem('thresholdYellow', yellow);
   fetchDomainData();
+  toggleSettings();
 }
 
 async function fetchDomainData() {
