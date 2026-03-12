@@ -13,6 +13,16 @@ A standalone web dashboard for monitoring domain renewals. This project extends 
 
 ---
 
+## 📸 Screenshots
+
+**Dark Mode**
+![Domain Expiration Monitor - Dark Mode](docs/screenshot-dark.png)
+
+**Light Mode**
+![Domain Expiration Monitor - Light Mode](docs/screenshot-light.png)
+
+---
+
 ## 🚀 Quick Start
 
 ### Prerequisites
